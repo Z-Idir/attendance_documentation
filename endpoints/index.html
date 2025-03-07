@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../api-documentation/">
       
-      
-        <link rel="next" href="../endpoints/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>API Documentation - Attendance & Employee Management API</title>
+        <title>Endpoints - Attendance & Employee Management API</title>
       
     
     
@@ -62,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#employees" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              API Documentation
+              Endpoints
             
           </span>
         </div>
@@ -209,6 +207,27 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-documentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Documentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -225,34 +244,13 @@
         
   
   <span class="md-ellipsis">
-    API Documentation
-    
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
     Endpoints
     
   </span>
   
 
       </a>
+      
     </li>
   
 
@@ -291,175 +289,16 @@
 
 
 
-<h1 id="overview">Overview</h1>
-<p>The api is a centralized and contained system for managing the needs of a single client (business) , in the future we will be working towards making it into a full Saas where having a new user for the system doesn't require the deployment of a new instance of the server to achieve it rather 
-We have in this system two entities, <a href="">employees</a> and <a href="">attendances</a> .</p>
-<h1 id="notes">Notes</h1>
-<ul>
-<li>Notice that the update endpoints use <code>POST</code> method instead of <code>PATCH</code> or <code>PUT</code> and that is because of a 'flaw' in <strong>php</strong> as it is unable to automatically parse incoming request body when the method is other than <code>POST</code> , <strong>Laravel</strong> framework implemented a workaround this by using a <code>POST</code> request and using a <em>magic string</em> within the request body that specifies that it actually is a <code>PUT</code> request, click <a href="https://bugs.php.net/bug.php?id=55815">here</a> for more info.</li>
-</ul>
-<h1 id="format-specification">Format specification</h1>
-<p>All requests that have a body require a <strong>content-type</strong> of <strong>multipart/form-data</strong> , and the response of all requests (with or without a body) have content type <strong>application/json</strong> , ==if an endpoint doesn't follow this format then it will be specified==.
-For the responses that are the same for all endpoints such as <strong>server errors</strong> <code>500</code> will not be specified here but rather in the exhaustive endpoints page <a href="../endpoints/">here</a></p>
-<h2 id="employee-management">Employee management</h2>
-<p>For the employees we have a list of endpoints <a href="./endpoints#employees">here</a>, and here we will provide the  workflow and details about the usage of these endpoints : </p>
-<h3 id="1-create-en-employee">**1. Create en employee</h3>
-<p>The first functionality we will see is that of employee creation :</p>
-<h4 id="endpoint">Endpoint :</h4>
-<pre><code class="language-r">POST /employee
-</code></pre>
-<h4 id="request-body">Request body :</h4>
-<pre><code>name : String
-salary : Float
-</code></pre>
-<h4 id="responses">Responses :</h4>
+<h1 id="employees">employees</h1>
 <ol>
-<li><strong>Success</strong> <code>200 OK</code></li>
+<li><strong>Validation Error</strong> <code>400 Bad Request</code>, where <code>${fieldName}</code> is the name of the field on which validation failed 
+```json
+{</li>
 </ol>
-<pre><code class="language-JSON">{
-
-    &quot;success&quot;: true,
-
-    &quot;message&quot;: &quot;Employee created successfully&quot;
-
-}
-</code></pre>
-<ol>
-<li><strong>Validation Error</strong> <code>400 Bad Request</code></li>
-<li>Server Error <code>500 Internal Server Error</code></li>
-</ol>
-<h3 id="2-get-an-employee-by-id"><strong>2. Get an employee by ID</strong></h3>
-<h4 id="endpoint_1">Endpoint :</h4>
-<pre><code class="language-r">GET /employee/{id}
-</code></pre>
-<h4 id="responses_1">Responses :</h4>
-<ol>
-<li><strong>Success</strong> <code>200 OK</code></li>
-</ol>
-<pre><code class="language-json">{
-
-    &quot;success&quot;: true,
-
-    &quot;data&quot;: {
-
-        &quot;id&quot;: 1,
-
-        &quot;name&quot;: &quot;hydrion&quot;,
-
-        &quot;salary&quot;: 35000,
-
-        &quot;created_at&quot;: null,
-
-        &quot;updated_at&quot;: null
-
-    }
-
-}
-</code></pre>
-<ol>
-<li><strong>Employee not found</strong> <code>404 Not Found</code></li>
-</ol>
-<pre><code class="language-json">{
-
-    &quot;success&quot;: false,
-
-    &quot;message&quot;: &quot;Employee not found&quot;
-
-}
-</code></pre>
-<ol>
-<li>Server Error <code>500 Internal Server Error</code></li>
-</ol>
-<h3 id="3-get-all-employees"><strong>3. Get all employees</strong></h3>
-<h4 id="endpoint_2">Endpoint :</h4>
-<pre><code class="language-r">GET /employee
-</code></pre>
-<h4 id="responses_2">Responses :</h4>
-<ol>
-<li><strong>Success</strong> <code>200 OK</code>
-<code>data</code> holds an <em>array</em> of employees</li>
-</ol>
-<pre><code class="language-json">{
-
-    &quot;success&quot;: true,
-
-    &quot;data&quot;: [
-
-        {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;hydrion&quot;,
-            &quot;salary&quot;: 35000,
-            &quot;created_at&quot;: null,
-            &quot;updated_at&quot;: null
-        },
-        {
-            &quot;id&quot;: 2,
-            &quot;name&quot;: &quot;sarpedon&quot;,
-            &quot;salary&quot;: 787878,
-            &quot;created_at&quot;: null,
-            &quot;updated_at&quot;: null
-        } ...
-            ]
-}
-</code></pre>
-<ol>
-<li>Server Error <code>500 Internal Server Error</code></li>
-</ol>
-<h3 id="4-update-an-employee"><strong>4. Update an employee</strong></h3>
-<h4 id="endpoint_3">Endpoint :</h4>
-<pre><code class="language-r">POST /employee/{id}
-</code></pre>
-<h4 id="request-body_1">Request body :</h4>
-<pre><code>name : String
-salary : Float
-</code></pre>
-<h4 id="responses_3">Responses :</h4>
-<ol>
-<li><strong>Update Successful</strong> <code>200 OK</code></li>
-</ol>
-<pre><code class="language-json">{
-
-    &quot;success&quot;: true,
-
-    &quot;data&quot;: {
-
-        &quot;id&quot;: 1,
-
-        &quot;name&quot;: &quot;hydrion&quot;,
-
-        &quot;salary&quot;: &quot;35000&quot;,
-
-        &quot;created_at&quot;: null,
-
-        &quot;updated_at&quot;: null
-
-    }
-
-}
-</code></pre>
-<ol>
-<li><strong>Employee not found</strong> <code>404  Not Found</code></li>
-<li>Server Error <code>500 Internal Server Error</code></li>
-<li><strong>Validation Error</strong> <code>400 Bad Request</code></li>
-</ol>
-<h3 id="5-delete-an-employee"><strong>5. Delete an employee</strong></h3>
-<h4 id="endpoint_4">Endpoint :</h4>
-<pre><code class="language-r">DELETE /employee/{id}
-</code></pre>
-<h4 id="responses_4">Responses :</h4>
-<ol>
-<li><strong>Delete Successful</strong> <code>200 OK</code></li>
-</ol>
-<pre><code class="language-json">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Employee deleted successfully&quot;
-}
-</code></pre>
-<ol>
-<li><strong>Employee not found</strong> <code>404  Not Found</code></li>
-<li>Server Error <code>500 Internal Server Error</code></li>
-</ol>
-<h1 id="attendance-management">Attendance management</h1>
+<p>"success": false,</p>
+<p>"message": "Validation failed",</p>
+<p>"errors": "Valeur invalide pour '${fieldName}'."</p>
+<p>}</p>
 
 
 
