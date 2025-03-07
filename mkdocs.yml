@@ -1,0 +1,6 @@
+site_name: Attendance & Employee Management API
+theme:
+  name: material  # Optional, but highly recommended for a clean UI
+nav:
+  - Home: index.md
+  - API Documentation: api-documentation.md
