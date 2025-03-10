@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#employees" class="md-skip">
+        <a href="#format-specification" class="md-skip">
           Skip to content
         </a>
       
@@ -289,16 +289,127 @@
 
 
 
-<h1 id="employees">employees</h1>
-<ol>
-<li><strong>Validation Error</strong> <code>400 Bad Request</code>, where <code>${fieldName}</code> is the name of the field on which validation failed 
-```json
-{</li>
-</ol>
-<p>"success": false,</p>
-<p>"message": "Validation failed",</p>
-<p>"errors": "Valeur invalide pour '${fieldName}'."</p>
-<p>}</p>
+<h1 id="format-specification">Format specification</h1>
+<p>All requests that have a body require a <strong>content-type</strong> of <strong>multipart/form-data</strong> , and the response of all requests (with or without a body) have content type <strong>application/json</strong> , <mark>if an endpoint doesn't follow this format then it will be specified</mark>.</p>
+<h1 id="endpoints">Endpoints</h1>
+<h2 id="employee-endpoints">Employee Endpoints</h2>
+<h2 id="employee-endpoints_1">Employee Endpoints</h2>
+<table>
+    <tr>
+        <th>endpoint</th>
+        <th>method</th>
+        <th>body</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <td>/employee</td>
+        <td>GET</td>
+        <td>/</td>
+        <td>get a full list of employees</td>
+    </tr>
+    <tr>
+        <td>/employee/{id}</td>
+        <td>GET</td>
+        <td>/</td>
+        <td>get an employee by id</td>
+    </tr>
+    <tr>
+        <td>/employee</td>
+        <td>POST</td>
+        <td>name : String<br>salary : Float</td>
+        <td>create an employee</td>
+    </tr>
+    <tr>
+        <td>/employee/{id}</td>
+        <td>POST</td>
+        <td>name : String<br>salary : Float</td>
+        <td>update an employee</td>
+    </tr>
+    <tr>
+        <td>/employee/{id}</td>
+        <td>DELETE</td>
+        <td>/</td>
+        <td>delete an employee</td>
+    </tr>
+</table>
+
+<h2 id="attendance-endpoints">Attendance Endpoints</h2>
+<table>
+    <thead>
+        <tr>
+            <th>endpoint</th>
+            <th>method</th>
+            <th>body</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>/attendance/{id}</td>
+            <td>GET</td>
+            <td>/</td>
+            <td>get an attendance by id</td>
+        </tr>
+        <tr>
+            <td>/attendance/{emp_id}/month/{yyyy}-{mm}</td>
+            <td>GET</td>
+            <td>/</td>
+            <td>get the attendance report of an employee for a given month</td>
+        </tr>
+        <tr>
+            <td>/attendance/{emp_id}/month/{yyyy}-{mm}-{dd}</td>
+            <td>GET</td>
+            <td>/</td>
+            <td>get the attendance entry of an employee at a given day</td>
+        </tr>
+        <tr>
+            <td>/attendance</td>
+            <td>POST</td>
+            <td>
+                date : Date<br>
+                employee_id : Int<br>
+                check_in : Time
+            </td>
+            <td>create an attendance</td>
+        </tr>
+        <tr>
+            <td>/attendance/{id}</td>
+            <td>POST</td>
+            <td>
+                field : Enum<br>
+                time : Time
+            </td>
+            <td>update an attendance entry</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="field-details">Field details</h3>
+<ul>
+<li>POST /attendance/{id}
+   <code>field : Enum('check_in','check_out','break_start','break_end')</code></li>
+</ul>
+<h1 id="responses">Responses</h1>
+<h2 id="400-bad-request">400 Bad Request</h2>
+<p>Validation error occurs when the request body contains invalid data either by sending fileds containing with incorrect data types or the data itself is incorrect, for example : trying to update an attendance field <code>break_start</code> to <code>08:30:22</code> while <code>check_in</code> is set to <code>09:01:22</code>, here <code>break_start</code> can't be set to be before <code>check_in</code> which results in a bad-request response .
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Validation failed&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valeur invalide pour &#39;${fieldName}&#39;.&quot;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<code>${fieldName}</code> is the name of the field on which validation failed </p>
+<h2 id="500-internal-server-error">500 Internal Server Error</h2>
+<p>This type of error occurs because of run-time exceptions, all exceptions must be caught and an appropriate user-friendly message be returned , as for lower layers like service layers exceptions must be thrown to be handled by the upper layers.
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">error</span><span class="w"> </span><span class="err">message</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 
 
 

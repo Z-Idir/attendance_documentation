@@ -292,174 +292,395 @@
 
 
 <h1 id="overview">Overview</h1>
-<p>The api is a centralized and contained system for managing the needs of a single client (business) , in the future we will be working towards making it into a full Saas where having a new user for the system doesn't require the deployment of a new instance of the server to achieve it rather 
-We have in this system two entities, <a href="">employees</a> and <a href="">attendances</a> .</p>
+<p>The api is a centralized and contained system for managing the needs of a single client (business) , in the future we will be working towards making it into a full Saas where having a new user for the system requires that user to create an account rather than requiring the deployment of a new instance of the server to achieve it.
+We have in this system two entities, <a href="#Employee%20management">employees</a> and <a href="#Attendance%20management">attendances</a> .</p>
 <h1 id="notes">Notes</h1>
 <ul>
 <li>Notice that the update endpoints use <code>POST</code> method instead of <code>PATCH</code> or <code>PUT</code> and that is because of a 'flaw' in <strong>php</strong> as it is unable to automatically parse incoming request body when the method is other than <code>POST</code> , <strong>Laravel</strong> framework implemented a workaround this by using a <code>POST</code> request and using a <em>magic string</em> within the request body that specifies that it actually is a <code>PUT</code> request, click <a href="https://bugs.php.net/bug.php?id=55815">here</a> for more info.</li>
 </ul>
 <h1 id="format-specification">Format specification</h1>
-<p>All requests that have a body require a <strong>content-type</strong> of <strong>multipart/form-data</strong> , and the response of all requests (with or without a body) have content type <strong>application/json</strong> , ==if an endpoint doesn't follow this format then it will be specified==.
+<p>All requests that have a body require a <strong>content-type</strong> of <strong>multipart/form-data</strong> , and the response of all requests (with or without a body) have content type <strong>application/json</strong> , <mark>if an endpoint doesn't follow this format then it will be specified</mark>.
 For the responses that are the same for all endpoints such as <strong>server errors</strong> <code>500</code> will not be specified here but rather in the exhaustive endpoints page <a href="../endpoints/">here</a></p>
 <h2 id="employee-management">Employee management</h2>
 <p>For the employees we have a list of endpoints <a href="./endpoints#employees">here</a>, and here we will provide the  workflow and details about the usage of these endpoints : </p>
-<h3 id="1-create-en-employee">**1. Create en employee</h3>
+<h3 id="1-create-en-employee">1. <strong>Create en employee</strong></h3>
 <p>The first functionality we will see is that of employee creation :</p>
 <h4 id="endpoint">Endpoint :</h4>
-<pre><code class="language-r">POST /employee
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">employee</span>
+</code></pre></div>
 <h4 id="request-body">Request body :</h4>
-<pre><code>name : String
+<div class="highlight"><pre><span></span><code>name : String
 salary : Float
-</code></pre>
+</code></pre></div>
 <h4 id="responses">Responses :</h4>
 <ol>
-<li><strong>Success</strong> <code>200 OK</code></li>
-</ol>
-<pre><code class="language-JSON">{
+<li><strong>Success</strong> <code>200 OK</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 
-    &quot;success&quot;: true,
+<span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-    &quot;message&quot;: &quot;Employee created successfully&quot;
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Employee created successfully&quot;</span>
 
-}
-</code></pre>
-<ol>
+<span class="p">}</span>
+</code></pre></div></li>
 <li><strong>Validation Error</strong> <code>400 Bad Request</code></li>
 <li>Server Error <code>500 Internal Server Error</code></li>
 </ol>
 <h3 id="2-get-an-employee-by-id"><strong>2. Get an employee by ID</strong></h3>
 <h4 id="endpoint_1">Endpoint :</h4>
-<pre><code class="language-r">GET /employee/{id}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">employee</span><span class="o">/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span>
+</code></pre></div>
 <h4 id="responses_1">Responses :</h4>
 <ol>
-<li><strong>Success</strong> <code>200 OK</code></li>
-</ol>
-<pre><code class="language-json">{
+<li>
+<p><strong>Success</strong> <code>200 OK</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 
-    &quot;success&quot;: true,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-    &quot;data&quot;: {
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 
-        &quot;id&quot;: 1,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 
-        &quot;name&quot;: &quot;hydrion&quot;,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hydrion&quot;</span><span class="p">,</span>
 
-        &quot;salary&quot;: 35000,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">35000</span><span class="p">,</span>
 
-        &quot;created_at&quot;: null,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 
-        &quot;updated_at&quot;: null
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 
-    }
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
 
-}
-</code></pre>
-<ol>
-<li><strong>Employee not found</strong> <code>404 Not Found</code></li>
-</ol>
-<pre><code class="language-json">{
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Employee not found</strong> <code>404 Not Found</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 
-    &quot;success&quot;: false,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
-    &quot;message&quot;: &quot;Employee not found&quot;
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Employee not found&quot;</span>
 
-}
-</code></pre>
-<ol>
-<li>Server Error <code>500 Internal Server Error</code></li>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Server Error</strong> <code>500 Internal Server Error</code></p>
+</li>
 </ol>
 <h3 id="3-get-all-employees"><strong>3. Get all employees</strong></h3>
 <h4 id="endpoint_2">Endpoint :</h4>
-<pre><code class="language-r">GET /employee
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">employee</span>
+</code></pre></div>
 <h4 id="responses_2">Responses :</h4>
 <ol>
 <li><strong>Success</strong> <code>200 OK</code>
-<code>data</code> holds an <em>array</em> of employees</li>
-</ol>
-<pre><code class="language-json">{
+<code>data</code> holds an <em>array</em> of employees
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 
-    &quot;success&quot;: true,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-    &quot;data&quot;: [
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 
-        {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;hydrion&quot;,
-            &quot;salary&quot;: 35000,
-            &quot;created_at&quot;: null,
-            &quot;updated_at&quot;: null
-        },
-        {
-            &quot;id&quot;: 2,
-            &quot;name&quot;: &quot;sarpedon&quot;,
-            &quot;salary&quot;: 787878,
-            &quot;created_at&quot;: null,
-            &quot;updated_at&quot;: null
-        } ...
-            ]
-}
-</code></pre>
-<ol>
-<li>Server Error <code>500 Internal Server Error</code></li>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hydrion&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">35000</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">},</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sarpedon&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">787878</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="err">...</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
 </ol>
 <h3 id="4-update-an-employee"><strong>4. Update an employee</strong></h3>
 <h4 id="endpoint_3">Endpoint :</h4>
-<pre><code class="language-r">POST /employee/{id}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">employee</span><span class="o">/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span>
+</code></pre></div>
 <h4 id="request-body_1">Request body :</h4>
-<pre><code>name : String
+<div class="highlight"><pre><span></span><code>name : String
 salary : Float
-</code></pre>
+</code></pre></div>
 <h4 id="responses_3">Responses :</h4>
 <ol>
-<li><strong>Update Successful</strong> <code>200 OK</code></li>
-</ol>
-<pre><code class="language-json">{
+<li><strong>Update Successful</strong> <code>200 OK</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 
-    &quot;success&quot;: true,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-    &quot;data&quot;: {
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 
-        &quot;id&quot;: 1,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 
-        &quot;name&quot;: &quot;hydrion&quot;,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hydrion&quot;</span><span class="p">,</span>
 
-        &quot;salary&quot;: &quot;35000&quot;,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;salary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;35000&quot;</span><span class="p">,</span>
 
-        &quot;created_at&quot;: null,
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 
-        &quot;updated_at&quot;: null
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 
-    }
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
 
-}
-</code></pre>
-<ol>
+<span class="p">}</span>
+</code></pre></div></li>
 <li><strong>Employee not found</strong> <code>404  Not Found</code></li>
-<li>Server Error <code>500 Internal Server Error</code></li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
 <li><strong>Validation Error</strong> <code>400 Bad Request</code></li>
 </ol>
 <h3 id="5-delete-an-employee"><strong>5. Delete an employee</strong></h3>
 <h4 id="endpoint_4">Endpoint :</h4>
-<pre><code class="language-r">DELETE /employee/{id}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">DELETE</span><span class="w"> </span><span class="o">/</span><span class="n">employee</span><span class="o">/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span>
+</code></pre></div>
 <h4 id="responses_4">Responses :</h4>
 <ol>
-<li><strong>Delete Successful</strong> <code>200 OK</code></li>
-</ol>
-<pre><code class="language-json">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Employee deleted successfully&quot;
-}
-</code></pre>
-<ol>
+<li><strong>Delete Successful</strong> <code>200 OK</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Employee deleted successfully&quot;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li><strong>Employee not found</strong> <code>404  Not Found</code></li>
-<li>Server Error <code>500 Internal Server Error</code></li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
 </ol>
-<h1 id="attendance-management">Attendance management</h1>
+<h2 id="attendance-management">Attendance management</h2>
+<h3 id="1-create-an-attendance"><strong>1. Create an attendance</strong></h3>
+<h4 id="endpoint_5">Endpoint :</h4>
+<div class="highlight"><pre><span></span><code><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">attendance</span>
+</code></pre></div>
+<h4 id="request-body_2">Request body :</h4>
+<p><div class="highlight"><pre><span></span><code>date : Date (yyyy-mm-dd)
+employee_id : Int
+check_in : Time (hh:mm:ss)
+</code></pre></div>
+- date : is the date for which the attendance entry is created for
+- employee_id : an integer that references the employee for which the entry is created
+- check_in :  the time of clock-in of the employee</p>
+<h4 id="responses_5">Responses :</h4>
+<ol>
+<li><strong>Success</strong> <code>200 OK</code> 
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;attendance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-02&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;employee_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;08:50:52&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+the response contains a status field <code>success</code> and data which contains the created attendance entry and an <code>id</code> which is redundant and will be removed later</li>
+<li><strong>Attendance already exists</strong> <code>409 Conflict</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Attendance already exists today&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;attendance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;employee_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-02&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;08:50:52&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_out&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;last_action&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+this response occurs in the case where the creation of an attendance entry is requested while there already is an entry corresponding to that employee and date given in the request's body, we get the attendance that causes the conflict in the response under : <code>data.attendance</code></li>
+<li><strong>Validation Error</strong> <code>400 Bad Request</code></li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
+</ol>
+<h3 id="2-modify-an-attendance"><strong>2. Modify an attendance</strong></h3>
+<h4 id="endpoint_6">Endpoint :</h4>
+<div class="highlight"><pre><span></span><code><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">attendance</span><span class="o">/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span>
+</code></pre></div>
+<h4 id="request-body_3">Request body :</h4>
+<p><div class="highlight"><pre><span></span><code>field : Enum(&#39;check_in&#39;,&#39;check_out&#39;,&#39;break_start&#39;,&#39;break_end&#39;)
+time : Time (hh:mm:ss)
+</code></pre></div>
+- field : the field which we want to modify 
+- time :  the time value to which we want the specified field to be set to</p>
+<h4 id="responses_6">Responses :</h4>
+<ol>
+<li><strong>Success</strong> <code>200 OK</code> 
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Attendance updated successfully.&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;employee_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-02-24&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;08:50:52&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_out&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;17:0:00&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;last_action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;check_out&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>Attendance not found</strong> <code>404 Not Found</code></li>
+<li><strong>Validation Error</strong> <code>400 Bad Request</code>
+    this could occur due to these reasons :<ul>
+<li>simple validation error : a field contains an invalid type or the <code>field</code> value is not one of <code>['check_in','check_out','break_start','break_end']</code> </li>
+<li>the request tried to set the value of a column to a <strong>chronologically</strong> invalid value, for example we have <code>check_in</code> set to : <code>09:02:12</code> and we try to set <code>break_start</code> to : <code>08:30:12</code> and this will trigger a bad request response</li>
+</ul>
+</li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
+</ol>
+<h3 id="3-get-a-months-report">3. <strong>Get a month's report</strong></h3>
+<h4 id="endpoint_7">Endpoint :</h4>
+<p>this endpoint returns the month's history, worked and office days, plus the payment 
+<div class="highlight"><pre><span></span><code><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">attendance</span><span class="o">/</span><span class="p">{</span><span class="n">emp_id</span><span class="p">}</span><span class="o">/</span><span class="n">month</span><span class="o">/</span><span class="p">{</span><span class="n">yyyy</span><span class="p">}</span><span class="o">-</span><span class="p">{</span><span class="n">mm</span><span class="p">}</span>
+</code></pre></div>
+- <code>emp_id</code> : the id of the employee for which we want to generate the report for
+- <code>{yyyy}-{mm}</code> : a formatted string that contains the year and month, ex : 2025-02</p>
+<h4 id="responses_7">Responses :</h4>
+<ol>
+<li><strong>Success</strong> <code>200 OK</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;workedDays&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;attendances&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;employee_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-02-01&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;08:30:00&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_out&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;last_action&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">},</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;employee_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err">...</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err">...</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">],</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;officeDaysNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;payement&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7000</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<code>data</code> : inside this field we have :</li>
+<li><code>workedDays</code> : the number of days the employee has worked in the given month <code>{mm}</code> in the request params.</li>
+<li><code>attendances</code> : a list of all attendance records for the month.</li>
+<li><code>officeDaysNumber</code> : the number of office days for the month, they are calculated by subtracting the number of holidays and weekends from the total days of the month, the holidays' dates are obtained from google calendar</li>
+<li><code>payement</code> : is the total salary of that employee, obtained from the <code>workedDays</code> and the employee's <code>salary</code> field</li>
+<li><strong>Employee Not Found</strong> <code>404 Not Found</code></li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
+</ol>
+<h3 id="4-get-the-attendance-of-a-certain-day">4. <strong>Get the attendance of a certain day</strong></h3>
+<h4 id="endpoint_8">Endpoint :</h4>
+<p>this endpoint returns the attendance entry specific to an employee for a specified date
+<div class="highlight"><pre><span></span><code><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">attendance</span><span class="o">/</span><span class="p">{</span><span class="n">emp_id</span><span class="p">}</span><span class="o">/</span><span class="n">day</span><span class="o">/</span><span class="p">{</span><span class="n">yyyy</span><span class="p">}</span><span class="o">-</span><span class="p">{</span><span class="n">mm</span><span class="p">}</span><span class="o">-</span><span class="p">{</span><span class="n">dd</span><span class="p">}</span>
+</code></pre></div>
+- <code>emp_id</code> : the id of the employee for which we want to get the attendance
+- <code>{yyyy}-{mm}</code>-{dd} : a formatted string that contains the date of the attendance, ex : 2025-02-01</p>
+<h4 id="responses_8">Responses :</h4>
+<ol>
+<li><strong>Success</strong> <code>200 OK</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;attendance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;employee_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-03&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_out&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15:04:16&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15:04:13&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15:04:15&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;last_action&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>Employee Not Found</strong> <code>404 Not Found</code></li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
+</ol>
+<h3 id="5-get-an-attendance-by-id">5. <strong>Get an attendance by id</strong></h3>
+<h4 id="endpoint_9">Endpoint :</h4>
+<p>this endpoint returns an attendance entry by its <code>id</code>
+<div class="highlight"><pre><span></span><code><span class="n">GET</span><span class="w"> </span><span class="o">/</span><span class="n">attendance</span><span class="o">/</span><span class="p">{</span><span class="n">att_id</span><span class="p">}</span>
+</code></pre></div>
+- <code>att_id</code> : the id of the attendance we want to fetch</p>
+<h4 id="responses_9">Responses :</h4>
+<ol>
+<li><strong>Success</strong> <code>200 OK</code>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;attendance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;employee_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-02-28&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11:01:10&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;check_out&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11:55:12&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11:54:47&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;break_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11:55:02&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;last_action&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>Attendance Not Found</strong> <code>404 Not Found</code></li>
+<li><strong>Server Error</strong> <code>500 Internal Server Error</code></li>
+</ol>
 
 
 
