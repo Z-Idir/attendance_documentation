@@ -59,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#welcome-to-the-attendance-and-employee-management-api" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -190,6 +195,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
       <a href="." class="md-nav__link md-nav__link--active">
         
@@ -265,6 +272,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -280,9 +289,27 @@
 
 
 
-  <h1>Home</h1>
-
-
+<h1 id="welcome-to-the-attendance-and-employee-management-api">Welcome to the Attendance and Employee Management API</h1>
+<p>This API serves as the backbone for managing employee attendance and information within our system. Built entirely using pure PHP and powered by an SQL database, this system follows a client-server architecture. The primary focus of this documentation is on the API aspect of the project.</p>
+<h1 id="architecture-and-structure">Architecture and Structure</h1>
+<p>The project is organized into several distinct layers, each handling specific responsibilities:</p>
+<ul>
+<li>Service Layer: Utilizes the Eloquent ORM to interact with the database, providing clean and efficient data management.</li>
+<li>Model Layer: Represents database entities as PHP objects, leveraging the Eloquent ORM for database operations.</li>
+<li>Controller Layer: Handles incoming HTTP requests and dispatches them to the appropriate services. This layer is responsible for parsing the request and generating appropriate responses.</li>
+<li>Router Layer: Manages routing and URL parameter extraction, calling authorization middleware when necessary to secure endpoints.</li>
+</ul>
+<h1 id="server-and-hosting">Server and Hosting</h1>
+<p>The API runs on an Apache HTTP server, which acts as the main request handler. The server leverages Apache’s request call method to efficiently process incoming requests. The project is containerized using Docker, ensuring consistent and isolated environments. The Docker Compose setup includes two key containers:</p>
+<ul>
+<li>Apache HTTP Server: Hosts and serves the API, processing client requests.</li>
+<li>SQL Server: Manages the database that stores employee and attendance data.</li>
+</ul>
+<h1 id="key-features">Key Features</h1>
+<p>Clean and Modular Design: Clearly separated layers for routing, request handling, service logic, and database interaction.
+Containerized Environment: Simplifies deployment and maintenance through Docker.
+Efficient Data Management: Uses Eloquent ORM to streamline data access and manipulation.
+Extensible Architecture: Easily add new features or extend existing functionality.</p>
 
 
 
