@@ -1,0 +1,517 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../endpoints/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Developer's guide - Attendance & Employee Management API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Attendance &amp; Employee Management API" class="md-header__button md-logo" aria-label="Attendance & Employee Management API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Attendance & Employee Management API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Developer's guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Attendance &amp; Employee Management API" class="md-nav__button md-logo" aria-label="Attendance & Employee Management API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Attendance & Employee Management API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-documentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Documentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Endpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Developer's guide
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>This page provides a thorough guide for developers to set up , run and maintain this project,
+the github repo for it is private so you will need to get the appropriate permissions from the admin.</p>
+<h1 id="prerequisites">Prerequisites</h1>
+<p>In order to run the project you will need the following installed on your system : 
+- Docker and Docker Compose</p>
+<h1 id="installation-and-setup">Installation and Setup</h1>
+<ol>
+<li>Clone the repository : 
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Z-Idir/pointeuse
+<span class="nb">cd</span><span class="w"> </span>pointeuse/backend
+</code></pre></div>
+We are only interested in the backend folder as it contains the API, the frontend is not within the scope of this documentation</li>
+<li>Start the docker containers :
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+this will spin up the following containers : </li>
+<li>Apache HTTP server : handles client requests</li>
+<li>MySQL Server : manages the sql database</li>
+</ol>
+<h1 id="accessing-the-api">Accessing the API</h1>
+<p>The API will be accessible at :
+<div class="highlight"><pre><span></span><code>http://localhost:8080/
+</code></pre></div>
+This is the base URL on which the URLs specified in the <a href="../endpoints/#endpoints">endpoints</a> are to be mounted on .</p>
+<h1 id="container-access-and-development">Container Access and Development</h1>
+<p>All development should be performed inside of the Docker container to insure consistency.</p>
+<h2 id="accessing-the-apache-server">Accessing the Apache server :</h2>
+<p>Run the following command : 
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>bash
+</code></pre></div>
+it will run the shell of the Apache server inside of the terminal you used to run the command.</p>
+<h3 id="installing-dependencies">Installing dependencies</h3>
+<p>once inside the server's terminal run the following command to install all dependencies using composer ( if composer is not available, first check out <a href="./issues#composer">this</a> , and if that didn't help raise an issue report)
+<div class="highlight"><pre><span></span><code>composer<span class="w"> </span>install
+</code></pre></div></p>
+<h2 id="running-db-initialization-and-migration">Running DB initialization and migration</h2>
+<p>When starting development the database will be clean, without even schema definitions, so in order to create the tables and so run the following command : 
+<div class="highlight"><pre><span></span><code>php<span class="w"> </span>Src/db/migrate.php<span class="w"> </span>migrate
+</code></pre></div></p>
+<h2 id="fetching-holidays">Fetching Holidays</h2>
+<p>The script <code>calendarSetup.php</code> that is found inside of <code>backend/</code> is responsible for fetching holidays and cleaning the data and putting it into a json file under the name <code>calendar.json</code> , in order to run it just run this command : 
+<div class="highlight"><pre><span></span><code>php calendarSetup.php getCalendar
+</code></pre></div>
+<strong>Note :</strong>  If any holiday besides the french ones any date can be added inside of the <code>calendar.json</code> file to accommodate for any additional holidays, the calendar file looks like this : 
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"> </span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="s2">&quot;2025-01-01&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="s2">&quot;2025-04-21&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="s2">&quot;2025-05-01&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="s2">&quot;2025-05-08&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="s2">&quot;2025-05-29&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="s2">&quot;2025-06-09&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="s2">&quot;2025-07-14&quot;</span><span class="p">,</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err">...</span>
+<span class="p">]</span>
+</code></pre></div>
+so just append a date anywhere in the array in the format : <code>yyyy-mm-dd</code> and it will be used by the api.</p>
+<h2 id="namespace-definition">Namespace definition</h2>
+<p>Namespaces are a way to map file paths to namespaces and make classes accessible that way, we can group relevant classes under the same namespace (this corresponds to modules), if we want to include a class in a module we have to specify the namespace at the top of the file where that class is defined : 
+<div class="highlight"><pre><span></span><code><span class="x">namespace App;</span>
+<span class="x">class foo {...}</span>
+</code></pre></div>
+the definition of namespaces is found inside of the <code>composer.json</code> file under <code>autoload.psr-4</code>,
+for example lets say we have a folder called <strong>Src/models</strong> and we want to associate it with a namespace in order to be able to access the classes defined within it by referencing <code>namespace.className</code>, let's call it <code>Models</code> we do the following : 
+1. add a namespace definition to <code>autoload.psr-4</code> :
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;autoload&quot;</span><span class="p">:{</span><span class="nt">&quot;psr-4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;DB\\&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Src/db/&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Models\\&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Src/models&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="err">...</span>
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}},</span>
+</code></pre></div>
+ 2. next we have to generate the autoload files which is a crucial step , inside the server's execution shell we want to execute <code>composer dump-autoload</code> : 
+ <code>shell
+ docker compose exec web bash</code>
+once inside the server's terminal run : 
+<div class="highlight"><pre><span></span><code>composer<span class="w"> </span>dump-autoload<span class="w"> </span>-o
+</code></pre></div>
+after this classes can be accessed through the namespaces associated with them </p>
+<h2 id="connecting-to-the-database">Connecting to the database</h2>
+<p>The database connection is delegated to the <strong>Eloquent ORM</strong> by creating what is called a capsule and attaching it to the global scope, the script responsible for connecting to the db is  <code>Src/db/Bootstrap.php</code> , so in order to be able to perform database operations we need to first boot it like this : 
+<div class="highlight"><pre><span></span><code><span class="x">use DB\Bootstrap;</span>
+<span class="x">Bootstrap::boot();</span>
+</code></pre></div>
+and after that the capsule is set to global scope and we can execute db operations.
+<strong>NOTE :</strong> notice the difference between the file structure <code>Src/db</code> and the namespace <code>DB</code> for an explanation see <a href="#namespace-definition">namespaces</a></p>
+<h1 id="project-structure">Project Structure</h1>
+<pre>  
+backend/ 
+├── src/ 
+│ ├── Controllers/ 
+│ ├── dao/ 
+│ ├── db/ 
+│ ├── Schemas/ 
+│ ├── Services/ 
+│ └── Utils/ 
+├── vendor/ 
+└── ...  </pre>
+<h1 id="making-changes">Making changes</h1>
+<h2 id="feature-addition">Feature addition</h2>
+<p>Follow these steps in order to add a feature, the order is of not matter actually just make sure to do all of these
+1. Create a new DAO (model) inside <code>Src/dao/</code>
+2. Create a new Service inside <code>Src/Services/</code>
+3. Create a new Controller inside of <code>Src/Controllers/</code> folder
+4. Add the corresponding routes inside  of <code>Router.php</code>
+5. Test the added routes using postman or curl.
+if validation is needed then : 
+- Create the validation schema inside of <code>Src/Schemas</code>
+- Call the <code>Validator::validate</code> function with the data and schema passed as parameters , the following is dummy code and incomplete so it won't run : 
+<div class="highlight"><pre><span></span><code><span class="x">use Schemas\AttendanceSchema;</span>
+<span class="x">use Utils\Validator;</span>
+
+<span class="x">$validation = Validator::validate($_POST, AttendanceSchema::creationSchema());</span>
+</code></pre></div>
+- <code>$_POST</code> is the data that needs to be validated
+- <code>AttendanceSchema::creationSchema()</code> is a function that returns the schema for the attendance creation data</p>
+<h2 id="database-changes">Database changes</h2>
+<p>The database schema is defined inside of <code>Src/db/SchemaDefinition.php</code> , so if changes are made before container build (clean database where migrations are not performed yet) then changes to the database are to be added directly inside <code>SchemaDefinition.php</code> in the <em>MIGRATION SECTION</em>, if the database is already created then an update must be performed which should be added to the <em>UPDATE SECTION</em> and be added to the <em>MIGRATION SECTION</em> as well .</p>
+<h3 id="examples">Examples</h3>
+<ol>
+<li>The migration section is denoted by a comment and is inside of an if-statement that checks the command provided through the command line like so : 
+<div class="highlight"><pre><span></span><code><span class="x">$command = $argv[1] ?? null;</span>
+
+<span class="x">// MIGRATIONS SECTION</span>
+
+<span class="x">if($command === &#39;migrate&#39;){</span>
+<span class="x">    SchemaDefinition::createEmployeesTable();</span>
+<span class="x">    ...</span>
+</code></pre></div></li>
+<li>In order to add to the schema definitions they should be added to the <code>SchemaDefinition</code> class and grouped as static methods :
+<div class="highlight"><pre><span></span><code><span class="x">use Illuminate\Database\Capsule\Manager as Capsule;</span>
+<span class="x">use Illuminate\Database\Schema\Blueprint;</span>
+
+<span class="x">class SchemaDefinition {</span>
+<span class="x">    public static function createEmployeesTable(){</span>
+<span class="x">        Capsule::schema()-&gt;create(&#39;employees&#39;,function(Blueprint $table){</span>
+<span class="x">            $table-&gt;increments(&#39;id&#39;);</span>
+<span class="x">            $table-&gt;string(&#39;name&#39;);</span>
+<span class="x">            $table-&gt;float(&#39;salary&#39;);</span>
+<span class="x">            $table-&gt;timestamps();</span>
+<span class="x">        });</span>
+<span class="x">    }</span>
+</code></pre></div>
+and then they must be called inside the <em>MIGRATION SECTION</em> of <code>migrate.php</code></li>
+<li>If it is an update to the schema that we wish to do then a modification function should be created inside the <code>SchemaDefinition</code> class, here is an example of how this function should look like : 
+<div class="highlight"><pre><span></span><code><span class="x">public static function modifyAttendanceTable() {</span>
+<span class="x">        Capsule::schema()-&gt;table(&#39;attendance&#39;, function (Blueprint $table) {</span>
+<span class="x">            $table-&gt;string(&#39;last_action&#39;)-&gt;nullable()-&gt;after(&#39;break_end&#39;);</span>
+<span class="x">        });</span>
+<span class="x">    }</span>
+</code></pre></div>
+instead of calling <code>create</code> method on <code>Capsule::schema()</code> we call : <code>table</code> which selects an already existing table to modify its schema, <mark>remember that every schema modification will be required to be added in the migration section in order to be included in future builds of the image without having to resort to manually updating it</mark> </li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

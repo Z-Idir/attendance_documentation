@@ -9,20 +9,22 @@
       
       
       
+        <link rel="prev" href="../api-documentation/">
       
-        <link rel="next" href="api-documentation/">
+      
+        <link rel="next" href="../developer-guide/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
     
     
       
-        <title>Attendance & Employee Management API</title>
+        <title>Endpoints - Attendance & Employee Management API</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
       
       
 
@@ -41,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -60,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-the-attendance-and-employee-management-api" class="md-skip">
+        <a href="#format-specification" class="md-skip">
           Skip to content
         </a>
       
@@ -76,7 +78,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Attendance &amp; Employee Management API" class="md-header__button md-logo" aria-label="Attendance & Employee Management API" data-md-component="logo">
+    <a href=".." title="Attendance &amp; Employee Management API" class="md-header__button md-logo" aria-label="Attendance & Employee Management API" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -96,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Endpoints
             
           </span>
         </div>
@@ -171,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Attendance &amp; Employee Management API" class="md-nav__button md-logo" aria-label="Attendance & Employee Management API" data-md-component="logo">
+    <a href=".." title="Attendance &amp; Employee Management API" class="md-nav__button md-logo" aria-label="Attendance & Employee Management API" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -186,19 +188,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -208,7 +201,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -220,7 +212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-documentation/" class="md-nav__link">
+      <a href="../api-documentation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -238,10 +230,19 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="endpoints/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -251,6 +252,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -262,7 +264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="developer-guide/" class="md-nav__link">
+      <a href="../developer-guide/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -310,27 +312,126 @@
 
 
 
-<h1 id="welcome-to-the-attendance-and-employee-management-api">Welcome to the Attendance and Employee Management API</h1>
-<p>This API serves as the backbone for managing employee attendance and information within our system. Built entirely using pure PHP and powered by an SQL database, this system follows a client-server architecture. The primary focus of this documentation is on the API aspect of the project.</p>
-<h1 id="architecture-and-structure">Architecture and Structure</h1>
-<p>The project is organized into several distinct layers, each handling specific responsibilities:</p>
+<h1 id="format-specification">Format specification</h1>
+<p>All requests that have a body require a <strong>content-type</strong> of <strong>multipart/form-data</strong> , and the response of all requests (with or without a body) have content type <strong>application/json</strong> , <mark>if an endpoint doesn't follow this format then it will be specified</mark>.</p>
+<h1 id="endpoints">Endpoints</h1>
+<h2 id="employee-endpoints">Employee Endpoints</h2>
+<table>
+    <tr>
+        <th>endpoint</th>
+        <th>method</th>
+        <th>body</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <td>/employee</td>
+        <td>GET</td>
+        <td>/</td>
+        <td>get a full list of employees</td>
+    </tr>
+    <tr>
+        <td>/employee/{id}</td>
+        <td>GET</td>
+        <td>/</td>
+        <td>get an employee by id</td>
+    </tr>
+    <tr>
+        <td>/employee</td>
+        <td>POST</td>
+        <td>name : String<br>salary : Float</td>
+        <td>create an employee</td>
+    </tr>
+    <tr>
+        <td>/employee/{id}</td>
+        <td>POST</td>
+        <td>name : String<br>salary : Float</td>
+        <td>update an employee</td>
+    </tr>
+    <tr>
+        <td>/employee/{id}</td>
+        <td>DELETE</td>
+        <td>/</td>
+        <td>delete an employee</td>
+    </tr>
+</table>
+
+<h2 id="attendance-endpoints">Attendance Endpoints</h2>
+<table>
+    <thead>
+        <tr>
+            <th>endpoint</th>
+            <th>method</th>
+            <th>body</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>/attendance/{id}</td>
+            <td>GET</td>
+            <td>/</td>
+            <td>get an attendance by id</td>
+        </tr>
+        <tr>
+            <td>/attendance/{emp_id}/month/{yyyy}-{mm}</td>
+            <td>GET</td>
+            <td>/</td>
+            <td>get the attendance report of an employee for a given month</td>
+        </tr>
+        <tr>
+            <td>/attendance/{emp_id}/month/{yyyy}-{mm}-{dd}</td>
+            <td>GET</td>
+            <td>/</td>
+            <td>get the attendance entry of an employee at a given day</td>
+        </tr>
+        <tr>
+            <td>/attendance</td>
+            <td>POST</td>
+            <td>
+                date : Date<br>
+                employee_id : Int<br>
+                check_in : Time
+            </td>
+            <td>create an attendance</td>
+        </tr>
+        <tr>
+            <td>/attendance/{id}</td>
+            <td>POST</td>
+            <td>
+                field : Enum<br>
+                time : Time
+            </td>
+            <td>update an attendance entry</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="field-details">Field details</h3>
 <ul>
-<li>Service Layer: Utilizes the Eloquent ORM to interact with the database, providing clean and efficient data management.</li>
-<li>Model Layer: Represents database entities as PHP objects, leveraging the Eloquent ORM for database operations.</li>
-<li>Controller Layer: Handles incoming HTTP requests and dispatches them to the appropriate services. This layer is responsible for parsing the request and generating appropriate responses.</li>
-<li>Router Layer: Manages routing and URL parameter extraction, calling authorization middleware when necessary to secure endpoints.</li>
+<li>POST /attendance/{id}
+   <code>field : Enum('check_in','check_out','break_start','break_end')</code></li>
 </ul>
-<h1 id="server-and-hosting">Server and Hosting</h1>
-<p>The API runs on an Apache HTTP server, which acts as the main request handler. The server leverages Apache’s request call method to efficiently process incoming requests. The project is containerized using Docker, ensuring consistent and isolated environments. The Docker Compose setup includes two key containers:</p>
-<ul>
-<li>Apache HTTP Server: Hosts and serves the API, processing client requests.</li>
-<li>SQL Server: Manages the database that stores employee and attendance data.</li>
-</ul>
-<h1 id="key-features">Key Features</h1>
-<p>Clean and Modular Design: Clearly separated layers for routing, request handling, service logic, and database interaction.
-Containerized Environment: Simplifies deployment and maintenance through Docker.
-Efficient Data Management: Uses Eloquent ORM to streamline data access and manipulation.
-Extensible Architecture: Easily add new features or extend existing functionality.</p>
+<h1 id="responses">Responses</h1>
+<h2 id="400-bad-request">400 Bad Request</h2>
+<p>Validation error occurs when the request body contains invalid data either by sending fileds containing with incorrect data types or the data itself is incorrect, for example : trying to update an attendance field <code>break_start</code> to <code>08:30:22</code> while <code>check_in</code> is set to <code>09:01:22</code>, here <code>break_start</code> can't be set to be before <code>check_in</code> which results in a bad-request response .
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Validation failed&quot;</span><span class="p">,</span>
+
+<span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valeur invalide pour &#39;${fieldName}&#39;.&quot;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<code>${fieldName}</code> is the name of the field on which validation failed </p>
+<h2 id="500-internal-server-error">500 Internal Server Error</h2>
+<p>This type of error occurs because of run-time exceptions, all exceptions must be caught and an appropriate user-friendly message be returned , as for lower layers like service layers exceptions must be thrown to be handled by the upper layers.
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">error</span><span class="w"> </span><span class="err">message</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 
 
 
@@ -377,10 +478,10 @@ Extensible Architecture: Easily add new features or extend existing functionalit
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>

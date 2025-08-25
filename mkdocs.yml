@@ -4,3 +4,10 @@ theme:
 nav:
   - Home: index.md
   - API Documentation: api-documentation.md
+  - Endpoints : endpoints.md
+  - Developer's guide : developer-guide.md
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.mark
